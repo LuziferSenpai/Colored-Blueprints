@@ -1,0 +1,10 @@
+{
+  "name": "colored_blueprints",
+  "version": "0.1.2",
+  "title": "Colored Blueprints and Books",
+  "author": "LuziferSenpai",
+  "Licence": "Custom",
+  "description": "This MOD adds colored Blueprints and Books!",
+  "dependencies": ["base >= 0.16.0"],
+  "factorio_version": "0.16"
+}
