@@ -1,13 +1,11 @@
 require( "config" )
 
 data:extend
-(
- {
-  { type = "item-group", name = "colored-blueprints", icon = MODNAME .. "/graphics/icon.png", icon_size = 64, order = "gg" },
-  { type = "item-subgroup", name = "colored-blueprint", group = "colored-blueprints", order = "a" },
-  { type = "item-subgroup", name = "colored-book", group = "colored-blueprints", order = "b" }
- }
-)
+{
+ { type = "item-group", name = "colored-blueprints", icon = MODNAME .. "/graphics/icon.png", icon_size = 64, order = "gg" },
+ { type = "item-subgroup", name = "colored-blueprint", group = "colored-blueprints", order = "a" },
+ { type = "item-subgroup", name = "colored-book", group = "colored-blueprints", order = "b" }
+}
 
 local new_items = {}
 local new_recipes = {}
