@@ -1,39 +1,76 @@
-require( "config" )
+require "config"
+require "util"
+
+local m = "__colored_blueprints__"
 
 data:extend
 {
- { type = "item-group", name = "colored-blueprints", icon = MODNAME .. "/graphics/icon.png", icon_size = 64, order = "gg" },
- { type = "item-subgroup", name = "colored-blueprint", group = "colored-blueprints", order = "a" },
- { type = "item-subgroup", name = "colored-book", group = "colored-blueprints", order = "b" }
+	{ type = "item-group", name = "colored-blueprints", icon = m .. "/graphics/icon.png", icon_size = 64, order = "gg" },
+	{ type = "item-subgroup", name = "colored-blueprint", group = "colored-blueprints", order = "a" },
+	{ type = "item-subgroup", name = "colored-book", group = "colored-blueprints", order = "b" }
 }
 
-local new_items = {}
-local new_recipes = {}
-local ordernumber = 0
+local n = {}
+local o = 0
 
-for color, blank in pairs( BLUEPRINT_COLOR ) do
-	if ordernumber < 10 then pad = "0" else pad = "" end
-	ordernumber = ordernumber + 1
+local color_vanilla = "#1A78AB"
 
-	local new_print = util.table.deepcopy( data.raw["blueprint"]["blueprint"] )
-	new_print.name = color .. "-blueprint"
-	new_print.icon = MODNAME .. "/graphics/" .. color .. "-blueprint.png"
-	new_print.subgroup = "colored-blueprint"
-	new_print.order = "print-" .. pad .. ordernumber
-	new_print.localised_name = {"item-name.colored-blueprints", { color } }
+data.raw["blueprint"]["blueprint"].icon = nil
+data.raw["blueprint"]["blueprint"].icons =
+{
+	{ icon = m .. "/graphics/blueprint-base.png", icon_size = 32 },
+	{ icon = m .. "/graphics/blueprint-mask.png", icon_size = 32, tint = util.color( color_vanilla ) }
+}
+data.raw["blueprint"]["blueprint"].localised_name = { "colored.colored-blueprints", color_vanilla }
 
-	table.insert( new_items, new_print )
+data.raw["blueprint-book"]["blueprint-book"].icon = nil
+data.raw["blueprint-book"]["blueprint-book"].icons =
+{
+	{ icon = m .. "/graphics/blueprint-book-base.png", icon_size = 32 },
+	{ icon = m .. "/graphics/blueprint-book-mask.png", icon_size = 32, tint = util.color( color_vanilla ) }
+}
+data.raw["blueprint-book"]["blueprint-book"].localised_name = { "colored.colored-books", color_vanilla }
 
-	local new_book = util.table.deepcopy( data.raw["blueprint-book"]["blueprint-book"] )
-	new_book.name = color .. "-book"
-	new_book.icon = MODNAME .. "/graphics/" .. color .. "-book.png"
-	new_book.subgroup = "colored-book"
-	new_book.order = "book-" .. pad .. ordernumber
-	new_book.localised_name = {"item-name.colored-books", { color } }
+--local s = settings.startup["new-colors"].value
 
-	table.insert( new_items, new_book )
+local Colors = {}
+
+--[[if s ~= "" then
+	forword in string.gmatch( s, "#[0-9a-fA-F]+" ) do log( word ) end
+end]]
+
+for h, _ in pairs( Senpais.BookColors ) do
+	Colors[h] = true
 end
 
-for i = 1, #new_items do
-	data:extend( { new_items[i] } )
+for h, _ in pairs( Colors ) do
+	if o < 10 then p = "0" else p = "" end
+	o = o + 1
+
+	local np = util.table.deepcopy( data.raw["blueprint"]["blueprint"] )
+	np.name = h .. "-colored-blueprint"
+	np.icon = nil
+	np.icons =
+	{
+		{ icon = m .. "/graphics/blueprint-base.png", icon_size = 32 },
+		{ icon = m .. "/graphics/blueprint-mask.png", icon_size = 32, tint = util.color( h ) }
+	}
+	np.subgroup = "colored-blueprint"
+	np.order = "print-" .. p .. o
+	np.localised_name = { "colored.colored-blueprints", h }
+	np.localised_description = { "item.description.blueprint" }
+
+	local nb = util.table.deepcopy( data.raw["blueprint-book"]["blueprint-book"] )
+	nb.name = h .. "-colored-book"
+	nb.icon = nil
+	nb.icons =
+	{
+		{ icon = m .. "/graphics/blueprint-book-base.png", icon_size = 32 },
+		{ icon = m .. "/graphics/blueprint-book-mask.png", icon_size = 32, tint = util.color( h ) }
+	}
+	nb.subgroup = "colored-book"
+	nb.order = "book-" .. p .. o
+	localised_name = { "colored.colored-books", h }
+	
+	data:extend{ np, nb }
 end
