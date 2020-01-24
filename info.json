@@ -1,10 +1,10 @@
 {
   "name": "colored_blueprints",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "title": "Colored Blueprints and Books",
   "author": "LuziferSenpai",
   "Licence": "Custom",
   "description": "This Modification adds new Blueprints/Blueprint Books, to help you with managing your Blueprints.",
   "dependencies": ["base"],
-  "factorio_version": "0.17"
+  "factorio_version": "0.18"
 }

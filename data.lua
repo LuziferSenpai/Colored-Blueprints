@@ -16,6 +16,8 @@ local o = 0
 local color_vanilla = "#1A78AB"
 
 data.raw["blueprint"]["blueprint"].icon = nil
+data.raw["blueprint"]["blueprint"].icon_size = nil
+data.raw["blueprint"]["blueprint"].icon_mimap = nil
 data.raw["blueprint"]["blueprint"].icons =
 {
 	{ icon = m .. "/graphics/blueprint-base.png", icon_size = 32 },
@@ -24,6 +26,8 @@ data.raw["blueprint"]["blueprint"].icons =
 data.raw["blueprint"]["blueprint"].localised_name = { "colored.colored-blueprints", color_vanilla }
 
 data.raw["blueprint-book"]["blueprint-book"].icon = nil
+data.raw["blueprint-book"]["blueprint-book"].icon_size = nil
+data.raw["blueprint-book"]["blueprint-book"].icon_mimap = nil
 data.raw["blueprint-book"]["blueprint-book"].icons =
 {
 	{ icon = m .. "/graphics/blueprint-book-base.png", icon_size = 32 },
@@ -50,6 +54,8 @@ for h, _ in pairs( Colors ) do
 	local np = util.table.deepcopy( data.raw["blueprint"]["blueprint"] )
 	np.name = h .. "-colored-blueprint"
 	np.icon = nil
+	np.icon_size = nil
+	np.icon_mimap = nil
 	np.icons =
 	{
 		{ icon = m .. "/graphics/blueprint-base.png", icon_size = 32 },
@@ -63,6 +69,8 @@ for h, _ in pairs( Colors ) do
 	local nb = util.table.deepcopy( data.raw["blueprint-book"]["blueprint-book"] )
 	nb.name = h .. "-colored-book"
 	nb.icon = nil
+	nb.icon_size = nil
+	nb.icon_mimap = nil
 	nb.icons =
 	{
 		{ icon = m .. "/graphics/blueprint-book-base.png", icon_size = 32 },
@@ -70,7 +78,7 @@ for h, _ in pairs( Colors ) do
 	}
 	nb.subgroup = "colored-book"
 	nb.order = "book-" .. p .. o
-	localised_name = { "colored.colored-books", h }
+	nb.localised_name = { "colored.colored-books", h }
 	
 	data:extend{ np, nb }
 end
